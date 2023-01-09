@@ -1,0 +1,10 @@
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: demo-command
+spec:
+  containers:
+  - name: demo-command
+    image: debian:latest
+    command: ["/bin/sh"]
+    args: ["-c","while true; do echo 'This is every 5 second check'; sleep 5; done"]

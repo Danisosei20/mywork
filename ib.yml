@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lb-httpd
+  labels:
+    brand: honda
+spec:
+  containers:
+  - name: nginx
+    image: httpd
+    ports:
+      - containerPort: 80
+        name: http-web-svc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+spec:
+  selector:
+    brand: honda
+  type: LoadBalancer
+  ports:
+  - name: name-of-service-port
+    protocol: TCP
+    port: 80
+    targetPort: 80
