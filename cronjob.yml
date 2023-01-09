@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mycron-danis
+spec:
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec: 
+      completions: 2
+      activeDeadlineSeconds: 35
+      template:
+        spec:
+          containers:
+          - name: alpine
+            image: alpine
+            command:
+            - /bin/sh
+            - -c
+            - date; echo "Danis-Osei"
+            - sleep 30
+          restartPolicy: OnFailure
